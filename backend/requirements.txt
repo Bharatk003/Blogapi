@@ -1,0 +1,12 @@
+Django==5.0.6  # Replace with your desired Django version (e.g., 4.2)
+djangorestframework==3.15.1  # Replace with desired rest_framework version
+
+# Packages for authentication
+dj-rest-auth==6.0.0  # Replace with desired dj-rest-auth version
+allauth==0.63.3  # Replace with desired allauth version
+
+# Optional package for documentation
+drf-yasg==1.21.7  # Replace with desired drf-yasg version
+pillow==10.2.0
+sqlparse==0.4.4
+tzdata==2023.4
