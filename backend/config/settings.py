@@ -11,10 +11,10 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 """
 
 from pathlib import Path
-
+import dj__database_url
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-
+import os
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
@@ -23,9 +23,11 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-!=j84p_dv@@t)m_ul*ml%fgyd#ls(zsb&(g-+%z7+r%+-co!c%'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = os.environ.get("DEBUG", "False").lower() == "true"
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["blogapi-99vm.onrender.com", "localhost", "127.0.0.1"]
+
+
 
 
 # Application definition
@@ -39,6 +41,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django.contrib.sites', # new
     #third party 
+    'corsheaders',
     'rest_framework',
     'rest_framework.authtoken',
     'allauth',
@@ -51,20 +54,6 @@ INSTALLED_APPS = [
     'posts',
 ]
 
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend' # new
-SITE_ID = 1 # new
-
-
-
-REST_FRAMEWORK = {
-'DEFAULT_PERMISSION_CLASSES': [
-'rest_framework.permissions.IsAuthenticated',
-],
-'DEFAULT_AUTHENTICATION_CLASSES': [ # new
-'rest_framework.authentication.SessionAuthentication',
-'rest_framework.authentication.BasicAuthentication'
-],
-}
 
 
 MIDDLEWARE = [
@@ -72,6 +61,8 @@ MIDDLEWARE = [
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
+    'django.middleware.common.CommonMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
@@ -98,6 +89,9 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'config.wsgi.application'
 
+# settings.py
+
+ 
 
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
@@ -109,7 +103,7 @@ DATABASES = {
     }
 }
 
-
+DATABASES['default'] = dj_database_url.parse("postgresql://devsphere_data_storage_user:YpuLMxsYZvXerylluisLfcZiFjoaGPBi@dpg-cqevc98gph6c73b21qcg-a.oregon-postgres.render.com/devsphere_data_storage")
 # Password validation
 # https://docs.djangoproject.com/en/5.0/ref/settings/#auth-password-validators
 
@@ -150,3 +144,30 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend' # new
+SITE_ID = 1 # new
+
+
+
+REST_FRAMEWORK = {
+'DEFAULT_PERMISSION_CLASSES': [
+'rest_framework.permissions.IsAuthenticated',
+],
+'DEFAULT_AUTHENTICATION_CLASSES': [ # new
+'rest_framework.authentication.SessionAuthentication',
+'rest_framework.authentication.BasicAuthentication'
+],
+}
+
+ 
+ 
+CORS_ALLOW_ALL_ORIGINS = True
+CORS_ALLOW_CREDENTIALS = True
+CORS_ALLOW_HEADERS = [
+    'content-type',
+    'authorization',
+    'Access-Control-Allow-Origin',
+    'Access-Control-Allow-Credentials',
+]

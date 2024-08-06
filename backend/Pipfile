@@ -10,6 +10,7 @@ django = "*"
 pyyaml = "*"
 uritemplate = "*"
 drf-yasg = "*"
+dj-database-url = "*"
 
 [dev-packages]
 
