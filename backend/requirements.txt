@@ -3,7 +3,7 @@ djangorestframework==3.15.1  # Replace with desired rest_framework version
 
 # Packages for authentication
 dj-rest-auth==6.0.0  # Replace with desired dj-rest-auth version
-django-allauth==63.0.0 # Replace with desired allauth version
+django-allauth==64.0.0 # Replace with desired allauth version
 
 # Optional package for documentation
 drf-yasg==1.21.7  # Replace with desired drf-yasg version
